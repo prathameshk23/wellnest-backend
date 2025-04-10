@@ -1,10 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSymptomsTrackingDto } from './dto/create-symptoms_tracking.dto';
 import { UpdateSymptomsTrackingDto } from './dto/update-symptoms_tracking.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { SymptomsTracking } from './entities/symptoms_tracking.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SymptomsTrackingService {
-  create(createSymptomsTrackingDto: CreateSymptomsTrackingDto) {
+  constructor(
+    @InjectRepository(SymptomsTracking)
+    private readonly repository: Repository<SymptomsTracking>,
+  ) { }
+  async create(createSymptomsTrackingDto: CreateSymptomsTrackingDto) {
+    console.log('createSymptomsTrackingDto', createSymptomsTrackingDto);
+    const symptomsTracking = this.repository.create(createSymptomsTrackingDto);
     return 'This action adds a new symptomsTracking';
   }
 

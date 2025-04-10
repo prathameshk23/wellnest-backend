@@ -9,7 +9,7 @@ export class Symptom {
   @Column('varchar', { length: 200 })
   name: string;
 
-  @Column('varchar', { length: 200 })
+  @Column('varchar', { length: 200, nullable: true })
   description: string;
 
   @OneToMany(() => UserSymptom, (userSymptom) => userSymptom.symptom)

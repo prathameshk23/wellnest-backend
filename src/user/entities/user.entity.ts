@@ -16,6 +16,33 @@ export class User {
   @Column('varchar', { length: 200 })
   email: string;
 
+  @Column()
+  panda: string;
+
+  @Column()
+  username: string;
+
+  @Column('varchar', { length: 100 })
+  gender: string;
+
+  @Column()
+  age_group: string;
+
+  @Column()
+  motivation_level: string;
+
+  @Column('text', { array: true })
+  wellness_goals: string[]
+
+  @Column()
+  health_status: string;
+
+  @Column()
+  isMenstrual: boolean;
+
+  @Column()
+  authid: string;
+
   @OneToMany(() => UserSymptom, (userSymptom) => userSymptom.user)
   userSymptoms: UserSymptom[];
 

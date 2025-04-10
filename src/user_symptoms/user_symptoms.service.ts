@@ -1,10 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserSymptomDto } from './dto/create-user_symptom.dto';
 import { UpdateUserSymptomDto } from './dto/update-user_symptom.dto';
+import { UserSymptom } from './entities/user_symptom.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UserSymptomsService {
-  create(createUserSymptomDto: CreateUserSymptomDto) {
+  constructor(
+    @InjectRepository(UserSymptom)
+    private readonly userSymptomRepository: Repository<UserSymptom>,
+  ) { }
+  async create(createUserSymptomDto: CreateUserSymptomDto) {
+    console.log('createUserSymptomDto', createUserSymptomDto);
+    const userSymptom = await this.userSymptomRepository.save(createUserSymptomDto);
     return 'This action adds a new userSymptom';
   }
 

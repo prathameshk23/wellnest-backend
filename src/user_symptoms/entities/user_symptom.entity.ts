@@ -1,6 +1,6 @@
 import { Symptom } from 'src/symptoms/entities/symptom.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class UserSymptom {
@@ -12,4 +12,11 @@ export class UserSymptom {
 
   @ManyToOne(() => Symptom, (symptom) => symptom.userSymptoms)
   symptom: Symptom;
+
+
+  // @Column()
+  // user: string;
+
+  // @Column()
+  // symptom: string;
 }

@@ -4,6 +4,7 @@ import { UpdateUserSymptomDto } from './dto/update-user_symptom.dto';
 import { UserSymptom } from './entities/user_symptom.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class UserSymptomsService {
@@ -21,8 +22,15 @@ export class UserSymptomsService {
     return `This action returns all userSymptoms`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userSymptom`;
+  async findOne(id: string) {
+    var response = await this.userSymptomRepository.find({ where: { user: { id: id } } });
+    const result = response.map((item) => ({
+      id: item.id,
+      userId: item.user.id,
+      symptom: item.symptom, // or use symptom.id if that's all you want
+    }));
+
+    return result;
   }
 
   update(id: number, updateUserSymptomDto: UpdateUserSymptomDto) {

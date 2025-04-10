@@ -9,15 +9,15 @@ export class SleepTracking {
   @Column('varchar', { length: 200 })
   sleep_quality: string;
 
-  @Column('timestamp with time zone')
+  @Column('date')
   date: Date;
 
-  @Column('timestamp with time zone')
-  sleep_time: Date;
+  @Column()
+  sleep_time: string;
 
   @Column('varchar', { length: 200 })
   sleep_factor: string;
 
-  @ManyToOne(() => User, (user) => user.sleepTrackings)
+  @ManyToOne(() => User, (user) => user.sleepTrackings, { eager: true })
   user: User;
 }

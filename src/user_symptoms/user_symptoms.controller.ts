@@ -5,7 +5,7 @@ import { UpdateUserSymptomDto } from './dto/update-user_symptom.dto';
 
 @Controller('user-symptoms')
 export class UserSymptomsController {
-  constructor(private readonly userSymptomsService: UserSymptomsService) {}
+  constructor(private readonly userSymptomsService: UserSymptomsService) { }
 
   @Post()
   create(@Body() createUserSymptomDto: CreateUserSymptomDto) {
@@ -19,7 +19,7 @@ export class UserSymptomsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userSymptomsService.findOne(+id);
+    return this.userSymptomsService.findOne(id);
   }
 
   @Patch(':id')

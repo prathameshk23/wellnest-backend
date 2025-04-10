@@ -11,6 +11,8 @@ import { SymptomsTrackingModule } from './symptoms_tracking/symptoms_tracking.mo
 import { UserSymptomsModule } from './user_symptoms/user_symptoms.module';
 import { UserOtherTrackingModule } from './user_other_tracking/user_other_tracking.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { HealthModule } from './health/health.module';
+import { MedicineModule } from './medicine/medicine.module';
 
 const dotenv = require('dotenv');
 
@@ -33,6 +35,8 @@ dotenv.config({ path: './.env' });
     SymptomsTrackingModule,
     UserSymptomsModule,
     UserOtherTrackingModule,
+    HealthModule,
+    MedicineModule,
   ],
   controllers: [AppController],
   providers: [AppService],

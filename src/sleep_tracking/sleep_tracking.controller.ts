@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SleepTrackingService } from './sleep_tracking.service';
 import { CreateSleepTrackingDto } from './dto/create-sleep_tracking.dto';
 import { UpdateSleepTrackingDto } from './dto/update-sleep_tracking.dto';
 
 @Controller('sleep-tracking')
 export class SleepTrackingController {
-  constructor(private readonly sleepTrackingService: SleepTrackingService) {}
+  constructor(private readonly sleepTrackingService: SleepTrackingService) { }
 
   @Post()
   create(@Body() createSleepTrackingDto: CreateSleepTrackingDto) {
@@ -13,8 +13,11 @@ export class SleepTrackingController {
   }
 
   @Get()
-  findAll() {
-    return this.sleepTrackingService.findAll();
+  findFromDate(
+    @Query('userId') userId: string,
+    @Query('date') date: string,
+  ) {
+    return this.sleepTrackingService.findFromDate({ userId, date });
   }
 
   @Get(':id')

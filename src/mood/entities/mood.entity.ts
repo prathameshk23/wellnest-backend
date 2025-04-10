@@ -12,6 +12,6 @@ export class Mood {
   @Column('varchar', { length: 200 })
   description: string;
 
-  @OneToMany(() => MoodTracking, (moodTracking) => moodTracking.mood)
-  moodTrackings: MoodTracking[];
+  // @OneToMany(() => MoodTracking, (moodTracking) => moodTracking.mood)
+  // moodTrackings: MoodTracking[];
 }

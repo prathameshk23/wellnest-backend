@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { UserOtherTrackingService } from './user_other_tracking.service';
 import { CreateUserOtherTrackingDto } from './dto/create-user_other_tracking.dto';
 import { UpdateUserOtherTrackingDto } from './dto/update-user_other_tracking.dto';
 
 @Controller('user-other-tracking')
 export class UserOtherTrackingController {
-  constructor(private readonly userOtherTrackingService: UserOtherTrackingService) {}
+  constructor(private readonly userOtherTrackingService: UserOtherTrackingService) { }
 
   @Post()
   create(@Body() createUserOtherTrackingDto: CreateUserOtherTrackingDto) {
@@ -13,8 +13,11 @@ export class UserOtherTrackingController {
   }
 
   @Get()
-  findAll() {
-    return this.userOtherTrackingService.findAll();
+  findFromDate(
+    @Query('userId') userId: string,
+    @Query('date') date: string,
+  ) {
+    return this.userOtherTrackingService.findFromDate({ userId, date });
   }
 
   @Get(':id')

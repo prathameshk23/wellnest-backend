@@ -13,7 +13,7 @@ export class SymptomsTrackingService {
   ) { }
   async create(createSymptomsTrackingDto: CreateSymptomsTrackingDto) {
     console.log('createSymptomsTrackingDto', createSymptomsTrackingDto);
-    const symptomsTracking = this.repository.create(createSymptomsTrackingDto);
+    const symptomsTracking = this.repository.save(createSymptomsTrackingDto);
     return 'This action adds a new symptomsTracking';
   }
 
@@ -21,8 +21,39 @@ export class SymptomsTrackingService {
     return `This action returns all symptomsTracking`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} symptomsTracking`;
+  async findOne(id: string) {
+    var response = await this.repository.find({ where: { user: { id: id } } });
+    const result = response.map((item) => ({
+      id: item.id,
+      value: item.value,
+      date: item.date,
+      userSymptomId: item.userSymptom.id,
+      userId: item.user.id,
+    }));
+    return result;
+  }
+
+  async findFromDate(input: any) {
+    const { userId, date } = input;
+
+    const parsedDate = new Date(date);
+
+    const response = await this.repository.find({
+      where: {
+        user: { id: userId },
+        date: parsedDate,
+      },
+    });
+
+    const result = response.map((item) => ({
+      id: item.id,
+      value: item.value,
+      date: item.date,
+      userSymptomId: item.userSymptom.id,
+      userId: item.user.id,
+    }));
+
+    return result;
   }
 
   update(id: number, updateSymptomsTrackingDto: UpdateSymptomsTrackingDto) {

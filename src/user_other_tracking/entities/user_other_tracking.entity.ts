@@ -7,7 +7,7 @@ export class UserOtherTracking {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('timestamp with time zone')
+  @Column('date')
   date: Date;
 
   @Column('varchar', { length: 200 })
@@ -16,9 +16,10 @@ export class UserOtherTracking {
   @ManyToOne(
     () => OtherTracking,
     (otherTracking) => otherTracking.userOtherTrackings,
+    { eager: true, nullable: true },
   )
   otherTracking: OtherTracking;
 
-  @ManyToOne(() => User, (user) => user.userOtherTrackings)
+  @ManyToOne(() => User, (user) => user.userOtherTrackings, { eager: true })
   user: User;
 }

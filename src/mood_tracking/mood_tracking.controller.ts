@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { MoodTrackingService } from './mood_tracking.service';
 import { CreateMoodTrackingDto } from './dto/create-mood_tracking.dto';
 import { UpdateMoodTrackingDto } from './dto/update-mood_tracking.dto';
 
 @Controller('mood-tracking')
 export class MoodTrackingController {
-  constructor(private readonly moodTrackingService: MoodTrackingService) {}
+  constructor(private readonly moodTrackingService: MoodTrackingService) { }
 
   @Post()
   create(@Body() createMoodTrackingDto: CreateMoodTrackingDto) {
@@ -13,8 +13,11 @@ export class MoodTrackingController {
   }
 
   @Get()
-  findAll() {
-    return this.moodTrackingService.findAll();
+  findFromDate(
+    @Query('userId') userId: string,
+    @Query('date') date: string,
+  ) {
+    return this.moodTrackingService.findFromDate({ userId, date });
   }
 
   @Get(':id')

@@ -10,12 +10,12 @@ export class MoodTracking {
   @Column('varchar', { length: 200 })
   value: string;
 
-  @Column('timestamp with time zone')
+  @Column('date')
   date: Date;
 
-  @ManyToOne(() => User, (user) => user.moodTrackings)
+  @ManyToOne(() => User, (user) => user.moodTrackings, { eager: true })
   user: User;
 
-  @ManyToOne(() => Mood, (mood) => mood.moodTrackings)
-  mood: Mood;
+  @Column('text', { array: true })
+  moods: string[];
 }

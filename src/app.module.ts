@@ -13,6 +13,7 @@ import { UserOtherTrackingModule } from './user_other_tracking/user_other_tracki
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HealthModule } from './health/health.module';
 import { MedicineModule } from './medicine/medicine.module';
+import { MenstrualModule } from './menstrual/menstrual.module';
 
 const dotenv = require('dotenv');
 
@@ -37,6 +38,7 @@ dotenv.config({ path: './.env' });
     UserOtherTrackingModule,
     HealthModule,
     MedicineModule,
+    MenstrualModule,
   ],
   controllers: [AppController],
   providers: [AppService],

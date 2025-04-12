@@ -1,5 +1,6 @@
 import { Health } from 'src/health/entities/health.entity';
 import { Medicine } from 'src/medicine/entities/medicine.entity';
+import { Menstrual } from 'src/menstrual/entities/menstrual.entity';
 import { MoodTracking } from 'src/mood_tracking/entities/mood_tracking.entity';
 import { SleepTracking } from 'src/sleep_tracking/entities/sleep_tracking.entity';
 import { SymptomsTracking } from 'src/symptoms_tracking/entities/symptoms_tracking.entity';
@@ -71,4 +72,7 @@ export class User {
 
   @OneToMany(() => Medicine, (medicine) => medicine.user)
   medicine: Medicine[];
+
+  @OneToMany(() => Menstrual, (menstrual) => menstrual.user)
+  menstrual: Menstrual[];
 }

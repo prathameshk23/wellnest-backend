@@ -10,11 +10,9 @@ export class MenstrualService {
   constructor(
     @InjectRepository(Menstrual)
     private readonly menstrualRepository: Repository<Menstrual>,
-
-  ) {
-
-  }
+  ) {}
   create(createMenstrualDto: CreateMenstrualDto) {
+    createMenstrualDto.dates = Array.from(new Set(createMenstrualDto.dates));
     console.log('createMenstrualDto', createMenstrualDto);
     const menstrual = this.menstrualRepository.save(createMenstrualDto);
     return 'This action adds a new menstrual';
@@ -47,8 +45,6 @@ export class MenstrualService {
 
     return result;
   }
-
-
 
   findOne(id: number) {
     return `This action returns a #${id} menstrual`;
